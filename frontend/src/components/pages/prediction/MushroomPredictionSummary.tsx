@@ -53,7 +53,9 @@ const MushroomPredictionSummary: React.FC<MushroomPredictionProps> = ({
                 position: "absolute",
                 height: "30px",
                 zIndex: 9,
-                width: `${prediction.prediction.probability * 100 + 3}%`,
+                width: `${
+                  (prediction.prediction.probability * 100 + 3) * 0.82
+                }%`,
               }}
             ></div>
           </div>
