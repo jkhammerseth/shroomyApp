@@ -12,4 +12,10 @@ class Mushroom(models.Model):
     area = models.CharField(max_length=255)
     image_url = models.URLField()
 
-
+#class Mushroom(models.Model):
+#    id = ObjectId()
+#    name = models.CharField(max_length=255)
+#    latin_name = models.CharField(max_length=255)
+#    description = models.TextField()
+#    NSNF = models.TextField()
+#    image_url = models.URLField()

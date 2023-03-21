@@ -1,5 +1,4 @@
 from django.http import JsonResponse
-from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -7,8 +6,6 @@ from .serializers import MushroomSerializer
 from .models import Mushroom
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from fastai.vision.all import load_learner
-from PIL import Image
-import io
 import numpy as np
 import cv2
 

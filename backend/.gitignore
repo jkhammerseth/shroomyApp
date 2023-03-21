@@ -1,2 +1,4 @@
 .env
 model/model_v1.25.pkl
+
+.*
