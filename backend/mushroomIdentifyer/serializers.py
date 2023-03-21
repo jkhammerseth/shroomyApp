@@ -5,5 +5,4 @@ from .models import Mushroom
 class MushroomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mushroom
-        fields = ['id', 'name', 'latin_name' ,'description', 'edible', 'poisonous', 'area', 'image_url']
-        # fields = ['id', 'name', 'latin_name', 'description','NSNF' , 'image_url']
+        fields = ['id', 'name', 's_name', 'nsnf_norm', 'comment' ,'description', 'recipe', 'image_urls', 'list_mislabel']
