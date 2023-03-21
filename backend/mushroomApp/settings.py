@@ -72,6 +72,9 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
+    'https://www.shroomy.no',
+    'https://shroomy.no'
+    
 ]
 
 ROOT_URLCONF = 'mushroomApp.urls'

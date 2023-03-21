@@ -26,7 +26,7 @@ def search_mushrooms(request):
     serializer = MushroomSerializer(mushrooms, many=True)
     return Response(serializer.data)
 
-@ensure_csrf_cookie
+@csrf_exempt
 def predict_mushroom(request):
     try:
         # Read binary data from request body
