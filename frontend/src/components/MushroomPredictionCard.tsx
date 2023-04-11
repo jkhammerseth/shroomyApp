@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { IMusroom, IPrediction } from "../api/interfaces";
-import { palette } from "../palette";
 import {
+  FALLBACK_MUSHROOM_IMAGE_URL,
+  IMusroom,
+  IPrediction,
+} from "../api/interfaces";
+import { palette } from "../palette";
+import MushroomCard, {
   StyledHeader,
   StyledIconImg,
   StyledMushroomImg,
   StyledWrapper,
 } from "./MushroomCard";
+import { nsnf_norm_icon } from "./nsnf_norm_enum_to_icon";
 
 interface MushroomPredictionProps {
   prediction: IPrediction;
@@ -16,12 +21,6 @@ interface MushroomPredictionProps {
 const MushroomPredictionCard: React.FC<MushroomPredictionProps> = ({
   prediction,
 }) => {
-  const [expandData, setExpandData] = useState<boolean>(false);
-
-  const handleTakePhoto = () => {
-    setExpandData(!expandData);
-  };
-
   const mushroom = prediction.prediction[0];
   const predStr = Number(prediction.probability * 100).toFixed(3);
 
@@ -33,38 +32,7 @@ const MushroomPredictionCard: React.FC<MushroomPredictionProps> = ({
         {prediction.name} <span>{predStr}</span>
         {`%`}
       </StyledNameDiv>
-      <StyledWrapper>
-        <StyledHeader>
-          {mushroom.name}{" "}
-          {mushroom.edible && (
-            <StyledIconImg src={`/edible-icon.png`} alt={"edible"} />
-          )}
-          {mushroom.poisonous && (
-            <StyledIconImg src={`/poisonous-icon.png`} alt={"poisonous"} />
-          )}
-        </StyledHeader>
-        <StyledMushroomImg
-          src={mushroom.image_url}
-          alt={mushroom.name}
-          onClick={handleTakePhoto}
-        />
-        {expandData && (
-          <>
-            <p>
-              <strong>Area:</strong> {mushroom.area}
-            </p>
-            <p>
-              <strong>Description:</strong> {mushroom.description}
-            </p>
-            <p>
-              <strong>Edible:</strong> {mushroom.edible ? "Yes" : "No"}
-            </p>
-            <p>
-              <strong>Poisonous:</strong> {mushroom.poisonous ? "Yes" : "No"}
-            </p>
-          </>
-        )}
-      </StyledWrapper>
+      <MushroomCard mushroom={mushroom} />
     </div>
   );
 };

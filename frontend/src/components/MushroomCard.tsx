@@ -1,38 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { frontEndServerURL } from "../api/apicontext";
-import { IMusroom } from "../api/interfaces";
+import { FALLBACK_MUSHROOM_IMAGE_URL, IMusroom } from "../api/interfaces";
 import { hexToRgba, palette } from "../palette";
+import { nsnf_norm_icon } from "./nsnf_norm_enum_to_icon";
 
 interface MushroomProps {
   mushroom: IMusroom;
 }
 
 const MushroomCard: React.FC<MushroomProps> = ({ mushroom }) => {
+  const [expandData, setExpandData] = useState<boolean>(false);
+
+  const handleTakePhoto = () => {
+    setExpandData(!expandData);
+  };
+
   return (
     <StyledWrapper>
       <StyledHeader>
-        {mushroom.name}{" "}
-        {mushroom.edible && (
-          <StyledIconImg src={`/edible-icon.png`} alt={"edible"} />
-        )}
-        {mushroom.poisonous && (
-          <StyledIconImg src={`/poisonous-icon.png`} alt={"poisonous"} />
-        )}
+        {mushroom.name} {nsnf_norm_icon(mushroom.nsnf_norm)}
       </StyledHeader>
-      <StyledMushroomImg src={mushroom.image_url} alt={mushroom.name} />
-      <p>
-        <strong>Area:</strong> {mushroom.area}
-      </p>
-      <p>
-        <strong>Description:</strong> {mushroom.description}
-      </p>
-      <p>
-        <strong>Edible:</strong> {mushroom.edible ? "Yes" : "No"}
-      </p>
-      <p>
-        <strong>Poisonous:</strong> {mushroom.poisonous ? "Yes" : "No"}
-      </p>
+      <StyledMushroomImg
+        src={mushroom.image_urls?.[0] || FALLBACK_MUSHROOM_IMAGE_URL}
+        alt={mushroom.name}
+        onClick={handleTakePhoto}
+      />
+      {expandData && (
+        <>
+          <p>
+            <strong>Comment:</strong> {mushroom.comment}
+          </p>
+          <p>
+            <strong>Description:</strong> {mushroom.description}
+          </p>
+          <p>
+            <strong>Edibility:</strong> {mushroom.nsnf_norm}
+          </p>
+          <p>
+            <strong>Scientific name:</strong> {mushroom.s_name}
+          </p>
+        </>
+      )}
     </StyledWrapper>
   );
 };

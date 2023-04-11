@@ -1,7 +1,7 @@
 import queryString from "query-string";
 import React, { useState } from "react";
 import styled from "styled-components";
-import { IMusroom, IPrediction } from "../../../api/interfaces";
+import { IMusroom, IPrediction, NSNF_NORM } from "../../../api/interfaces";
 import MushroomPredictionCard from "../../MushroomPredictionCard";
 import MushroomPredictionSummary from "./MushroomPredictionSummary";
 
@@ -44,31 +44,14 @@ const CardsWrapper = styled.div`
   }
 `;
 
-const _DEBUG_prediction = {
-  prediction: [
-    {
-      area: "Norge",
-      description:
-        "Kantarell har gul, traktformet hatt, nedløpende folder og god kantarellukt. Har samme gulfarge på undersiden som oversiden. Avrundet stilk.",
-      edible: true,
-      id: 32,
-      image_url:
-        "https://media.snl.no/media/116599/standard_compressed_kantarell_37810.jpg",
-      latin_name: "Cantharellus cibarius",
-      name: "Kantarell",
-      poisonous: false,
-    },
-  ],
-  probability: 0.5896577835083008,
-};
-
 const fallback_prediction = {
-  area: "N/A",
+  nsnf_norm: NSNF_NORM.giftig,
+  comment: "",
+  recipe: null,
+  image_urls: ["/matblekksopp.png"],
+  list_mislabel: [],
   description: "Soppen finnes ikke i databasen, har du oppdaget en ny soppart?",
-  edible: false,
   id: -1,
-  image_url: "/matblekksopp.png",
-  latin_name: "Soppenis Finnisikke",
+  s_name: "Soppenis Finnisikke",
   name: "Finnes ikke i databasen",
-  poisonous: false,
 };
