@@ -24,16 +24,14 @@ const MushroomPredictionSummary: React.FC<MushroomPredictionProps> = ({
     setExpandData(!expandData);
   };
 
-  const SummaryObject = (prediction: IPrediction | any) => {
-    const mushroom = prediction.prediction.prediction[0];
-    const predStr = Number(prediction.prediction.probability * 100).toFixed(3);
+  const SummaryObject = (obj: { prediction: IPrediction }) => {
+    const mushroom = obj.prediction;
+    const predStr = Number(obj.prediction.probability * 100).toFixed(3);
     const name =
       !!mushroom && !mushroom.name.includes("nes ikke i databasen") ? (
         <span>{mushroom.name}</span>
       ) : (
-        <span style={{ fontStyle: "italic" }}>
-          {prediction.prediction.name}
-        </span>
+        <span style={{ fontStyle: "italic" }}>{obj.prediction.name}</span>
       );
     const pred = (
       <span style={{ float: "right", paddingLeft: "5px" }}>{predStr}%</span>
@@ -53,9 +51,7 @@ const MushroomPredictionSummary: React.FC<MushroomPredictionProps> = ({
                 position: "absolute",
                 height: "30px",
                 zIndex: 9,
-                width: `${
-                  (prediction.prediction.probability * 100 + 3) * 0.82
-                }%`,
+                width: `${(obj.prediction.probability * 100 + 3) * 0.82}%`,
               }}
             ></div>
           </div>
@@ -74,6 +70,7 @@ const MushroomPredictionSummary: React.FC<MushroomPredictionProps> = ({
         top: "100px",
         left: 0,
       }}
+      onClick={handleExpand}
     >
       <StyledWrapper>
         <div style={{ fontWeight: 700, fontSize: "20px" }}>

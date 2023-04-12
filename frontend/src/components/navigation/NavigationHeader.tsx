@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { StyledBackground } from "../../App";
 import { palette } from "../../palette";
 
 const NavigationHeader: React.FC = () => {
@@ -13,6 +14,7 @@ const NavigationHeader: React.FC = () => {
         zIndex: 1000,
       }}
     >
+      <StyledBackground />
       <div
         style={{
           display: "flex",
@@ -132,12 +134,19 @@ const StyledLinkWrapper = styled.div`
 
   a {
     font-family: retro;
-    color: ${palette.lightOrange};
+    color: #ffffffee;
     padding: 10px;
     font-size: 25px;
-    text-shadow: -1px -1px 0 ${palette.brownDarker},
-      1px -1px 0 ${palette.brownDarker}, -1px 1px 0 ${palette.brownDarker},
-      1px 1px 0 ${palette.brownDarker};
+    text-shadow: -1px -1px 0 ${palette.primaryBlue},
+      1px -1px 0 ${palette.primaryBlue}, -1px 1px 0 ${palette.primaryBlue},
+      1px 1px 0 ${palette.primaryBlue};
+    transition: font-size 0.25s ease-in-out, color 0.25s ease-in-out;
+
+    :hover {
+      font-size: 26px;
+      color: #ffffffff;
+      cursor: pointer;
+    }
   }
 `;
 

@@ -17,8 +17,16 @@ export interface IMusroomBasic {
 }
 
 export interface IPrediction {
-  prediction: IMusroom[];
   name: string;
+  predictied_id: null | number;
+  predicted_name: string;
+  probability: number; //Number between 0 and 1
+}
+
+export interface IPredictionIcludingFallbackId {
+  name: string;
+  predictied_id: number; //If the prediction is not found in the database, this will be the id of the fallback mushroom: -1
+  predicted_name: string;
   probability: number; //Number between 0 and 1
 }
 
