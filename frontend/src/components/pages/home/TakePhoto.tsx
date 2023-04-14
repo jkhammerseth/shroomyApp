@@ -4,6 +4,7 @@ import { mushroomAPI } from "../../../api/mushroomAPI";
 import { hexToRgba, palette } from "../../../palette";
 import { useNavigate } from "react-router-dom";
 import queryString from "query-string";
+import { SMALL_SCREEN_WIDTH } from "../../../constants";
 
 const TakePhoto = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -159,18 +160,24 @@ const TakePhoto = () => {
             }}
           >
             <img
+              id="dd-icon"
               src={`/dd-icon.png`}
               style={{
-                height: "250px",
+                height: "100px",
                 width: "auto",
                 zIndex: 2,
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
               }}
               alt={"draganddropicon"}
             />
             <img
+              id="chanty"
               src={`/chantarell-icon.png`}
               style={{
-                height: "400px",
+                height: "150px",
                 width: "auto",
                 borderRadius: "50%",
                 position: "absolute",
@@ -184,12 +191,13 @@ const TakePhoto = () => {
             />
             <div
               style={{
-                zIndex: 2,
-                marginTop: "-30px",
-                textAlign: "center",
-                fontWeight: "600",
-                fontSize: "25px",
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                whiteSpace: "nowrap",
               }}
+              id="dd-text"
             >
               {"Ta bilde eller slipp fil"}
             </div>
@@ -207,7 +215,10 @@ const TakePhoto = () => {
           />
         )}
       </div>
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div
+        id="buttonWrapper"
+        style={{ display: "flex", justifyContent: "center" }}
+      >
         <input type="file" accept="image/*" onChange={handleFileChange} />
         {!cameraActive && (
           <button onClick={handleTakePhoto}>
@@ -242,6 +253,36 @@ const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  #buttonWrapper {
+    flex-direction: column;
+  }
+
+  #dd-text {
+    z-index: 2;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14x;
+    padding-top: 100px !important;
+  }
+
+  @media (min-width: ${SMALL_SCREEN_WIDTH}px) {
+    #buttonWrapper {
+      flex-direction: row;
+    }
+    #dd-icon {
+      height: 250px !important;
+    }
+    #chanty {
+      height: 400px !important;
+    }
+
+    #dd-text {
+      padding-top: 260px !important;
+      margin-top: -30px !important;
+      font-size: 25px !important;
+    }
+  }
 
   button {
     margin: 6px;
